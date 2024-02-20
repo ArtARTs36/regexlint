@@ -23,11 +23,15 @@ type SourceLoader interface {
 
 func NewLinter(sourceLoader SourceLoader) *Linter {
 	goSyntax := &syntax.Go{}
+	pcreSyntax := &syntax.PCRE{}
 
 	return &Linter{
 		syntax: map[string]Syntax{
-			syntax.GoName:      goSyntax,
-			syntax.GoAliasName: goSyntax,
+			"go":     goSyntax,
+			"golang": goSyntax,
+			"pcre":   pcreSyntax,
+			"php":    pcreSyntax,
+			"perl":   pcreSyntax,
 		},
 		sourceLoader: sourceLoader,
 	}

@@ -12,7 +12,8 @@ RUN go mod download
 
 COPY . .
 
-RUN GOOS=linux go build -ldflags="-s -w" -o /go/bin/regexlint /go/src/github.com/artarts36/regexlint/cmd/main.go
+RUN apk --update add gcc libc-dev pcre pcre-dev
+RUN GOOS=linux CGO_ENABLED=1 go build -ldflags="-s -w -extldflags=-static" -o /go/bin/regexlint /go/src/github.com/artarts36/regexlint/cmd/main.go
 
 ######################################################
 
@@ -29,7 +30,5 @@ LABEL org.opencontainers.image.vendor="ArtARTs36"
 LABEL org.opencontainers.image.version="$APP_VERSION"
 LABEL org.opencontainers.image.created="$BUILD_TIME"
 LABEL org.opencontainers.image.licenses="MIT"
-
-EXPOSE 8080
 
 ENTRYPOINT ["/go/bin/regexlint"]

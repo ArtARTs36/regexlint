@@ -1,16 +1,15 @@
 package syntax
 
 import (
-	"regexp"
-
+	"github.com/GRbit/go-pcre"
 	"github.com/artarts36/regexlint/internal"
 )
 
-type Go struct {
+type PCRE struct {
 }
 
-func (s *Go) Lint(regex string) (*internal.Regex, error) {
-	_, err := regexp.Compile(regex)
+func (s *PCRE) Lint(regex string) (*internal.Regex, error) {
+	_, err := pcre.CompileParse(regex)
 	if err != nil {
 		return &internal.Regex{
 			String: regex,
