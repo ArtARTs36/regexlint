@@ -4,7 +4,7 @@ regexlint - simple application for regex validation, e.g. in CI pipelines for ch
 
 ## Use cases
 
-### Check PCRE (PERL, PHP) regex
+### 🐘 Check PCRE (PERL, PHP) regex
 
 ```sh
 regexlint pcre "invalid-regex())"
@@ -43,7 +43,7 @@ https:\/\/.*test-app.com
 regexlint pcre file.txt row-1
 ```
 
-### Check go regex
+### 🦫 Check Go regex
 
 ```sh
 regexlint go "invalid-regex())"
