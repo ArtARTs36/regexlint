@@ -33,6 +33,16 @@ regexlint pcre conf.yaml headers.cors
 regexlint pcre conf.json headers.cors
 ```
 
+#### Check regex from .txt file by row number
+```text
+string
+https:\/\/.*test-app.com
+```
+
+```sh
+regexlint pcre file.txt row-1
+```
+
 ### Check go regex
 
 ```sh
@@ -60,4 +70,14 @@ regexlint go conf.yaml headers.cors
 
 ```sh
 regexlint go conf.json headers.cors
+```
+
+#### Check regex from .txt file by row number
+```text
+string
+https:\/\/.*test-app.com
+```
+
+```sh
+regexlint go file.txt row-1
 ```

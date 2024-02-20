@@ -38,6 +38,8 @@ func FindString(val map[string]interface{}, pointer string) (string, error) {
 			}
 
 			curr = item.(map[string]interface{})
+		default:
+			return "", fmt.Errorf("key %q has unexpected type %q", fullKey, v.Type().Name())
 		}
 	}
 

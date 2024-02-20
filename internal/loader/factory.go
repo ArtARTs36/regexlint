@@ -5,6 +5,7 @@ func NewChain() *Chain {
 		loaders: []loader{
 			&YAML{},
 			&JSON{},
+			&TxtRow{},
 			&Var{},
 		},
 	}
