@@ -10,36 +10,41 @@ func FindString(val map[string]interface{}, pointer string) (string, error) {
 	curr := val
 	subs := strings.Split(pointer, ".")
 
-	fullKey := ""
+	currentKey := ""
 
 	for i, sub := range subs {
-		if fullKey != "" {
-			fullKey += "." + sub
+		if currentKey != "" {
+			currentKey += "." + sub
 		} else {
-			fullKey += sub
+			currentKey += sub
 		}
 
 		item, exists := curr[sub]
 		if !exists {
-			return "", fmt.Errorf("key %q not found", fullKey)
+			return "", fmt.Errorf("key %q not found", currentKey)
 		}
 
 		v := reflect.ValueOf(item)
-		switch v.Kind() {
+		switch v.Kind() { //nolint:exhaustive // no need to check all cases
 		case reflect.String:
 			if i == len(subs)-1 {
 				return v.String(), nil
 			}
 
-			return "", fmt.Errorf("key %q must be map", fullKey)
+			return "", fmt.Errorf("key %q must be map", currentKey)
 		case reflect.Map:
 			if i == len(subs)-1 {
-				return "", fmt.Errorf("key %q must be string", fullKey)
+				return "", fmt.Errorf("key %q must be string", currentKey)
 			}
 
-			curr = item.(map[string]interface{})
+			c, isMap := item.(map[string]interface{})
+			if !isMap {
+				return "", fmt.Errorf("key %q must be map[string][]", currentKey)
+			}
+
+			curr = c
 		default:
-			return "", fmt.Errorf("key %q has unexpected type %q", fullKey, v.Type().Name())
+			return "", fmt.Errorf("key %q has unexpected type %q", currentKey, v.Type().Name())
 		}
 	}
 

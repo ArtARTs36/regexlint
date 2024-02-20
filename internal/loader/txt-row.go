@@ -36,8 +36,10 @@ func (y *TxtRow) Load(source, pointer string) (string, error) {
 }
 
 func (y *TxtRow) pointerToRowNumber(pointer string) (int, error) {
+	const partsCount = 2
+
 	parts := strings.Split(pointer, "row-")
-	if len(parts) != 2 {
+	if len(parts) != partsCount {
 		return 0, fmt.Errorf("invalid row number")
 	}
 
