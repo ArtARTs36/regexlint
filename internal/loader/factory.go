@@ -3,8 +3,8 @@ package loader
 func NewChain() *Chain {
 	return &Chain{
 		loaders: []loader{
-			&YAML{},
-			&JSON{},
+			NewYAML(),
+			NewJSON(),
 			&TxtRow{},
 			&Var{},
 		},
