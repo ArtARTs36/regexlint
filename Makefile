@@ -15,3 +15,6 @@ docker-run:
 		-w /app \
 		--rm artarts36/regexlint:testing \
 		$(ARGS)
+
+test:
+	go test ./...

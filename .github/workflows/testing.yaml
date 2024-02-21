@@ -2,17 +2,15 @@ name: Testing
 
 on:
   push:
-    branches:
-      - master
   pull_request:
 
 jobs:
   lint:
     name: lint
-    runs-on: alpine-latest
+    runs-on: ubuntu-latest
     steps:
       - name: install deps
-        run: apk add gcc libc-dev pcre pcre-dev
+        run: sudo apt install gcc libpcre3 libpcre3-dev
 
       - name: Check out code
         uses: actions/checkout@v3
@@ -24,6 +22,9 @@ jobs:
 
       - name: Install Go dependencies
         run: go mod download
+
+      - name: Run tests
+        run: go test ./...
 
       - name: Run linter
         uses: golangci/golangci-lint-action@v3.7.0
