@@ -18,7 +18,7 @@ type Syntax interface {
 
 type regexLoader interface {
 	Supports(source, pointer string) bool
-	Load(source, pointer string) (string, error)
+	Load(source, pointer string) ([]string, error)
 }
 
 func NewLinter(regexLoader regexLoader) *Linter {
@@ -38,9 +38,9 @@ func NewLinter(regexLoader regexLoader) *Linter {
 }
 
 func (l *Linter) Lint(lang, source, sourcePointer string) (*LintResult, error) {
-	regex, err := l.sourceLoader.Load(source, sourcePointer)
+	regexes, err := l.sourceLoader.Load(source, sourcePointer)
 	if err != nil {
-		return nil, fmt.Errorf("unable to load regex: %s", err)
+		return nil, fmt.Errorf("unable to load regexes: %s", err)
 	}
 
 	s, found := l.syntax[lang]
@@ -48,14 +48,23 @@ func (l *Linter) Lint(lang, source, sourcePointer string) (*LintResult, error) {
 		return nil, fmt.Errorf("syntax %q not found", lang)
 	}
 
-	iRegex, err := s.Lint(regex)
-	if err != nil {
-		return nil, fmt.Errorf("lint failed: %s", err)
+	fails := 0
+	result := &LintResult{
+		Regexes: make([]*internal.Regex, 0, len(regexes)),
 	}
 
-	return &LintResult{
-		Regexes: []*internal.Regex{
-			iRegex,
-		},
-	}, nil
+	for _, regex := range regexes {
+		iRegex, err := s.Lint(regex)
+		if err != nil {
+			return nil, fmt.Errorf("lint failed: %s", err)
+		}
+
+		if !iRegex.Valid() {
+			fails++
+		}
+
+		result.Regexes = append(result.Regexes, iRegex)
+	}
+
+	return result, nil
 }
