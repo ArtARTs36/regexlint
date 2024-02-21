@@ -16,12 +16,22 @@ func main() {
 
 	l := linter.NewLinter(loader.NewChain())
 
-	regex, err := l.Lint(syntax, source, sourcePointer)
+	result, err := l.Lint(syntax, source, sourcePointer)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	log.Printf("regex %q is valid", regex.String)
+	for _, regex := range result.Regexes {
+		if regex.Valid() {
+			log.Printf("regex %q is valid", regex.String)
+		} else {
+			log.Printf("regex %q is invalid", regex.String)
+		}
+	}
+
+	if result.Failed() {
+		log.Fatalf("found %d invalid regexes", result.Fails)
+	}
 }
 
 func requireInputString(name string, order int) string {
