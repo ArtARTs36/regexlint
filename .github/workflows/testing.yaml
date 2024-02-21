@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: install deps
-        run: apt install gcc libpcre3 libpcre3-dev
+        run: sudo apt install gcc libpcre3 libpcre3-dev
 
       - name: Check out code
         uses: actions/checkout@v3
