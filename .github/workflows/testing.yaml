@@ -9,12 +9,8 @@ jobs:
     name: lint
     runs-on: ubuntu-latest
     steps:
-      - uses: jirutka/setup-alpine@v1
-        with:
-          branch: v3.15
-
       - name: install deps
-        run: apk add gcc libc-dev pcre pcre-dev
+        run: apt install gcc libpcre3 libpcre3-dev
 
       - name: Check out code
         uses: actions/checkout@v3
