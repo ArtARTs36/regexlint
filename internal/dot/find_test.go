@@ -1,10 +1,12 @@
-package dot
+package dot_test
 
 import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	"github.com/artarts36/regexlint/internal/dot"
 )
 
 func TestFindString(t *testing.T) {
@@ -26,7 +28,7 @@ func TestFindString(t *testing.T) {
 	}
 
 	for _, tCase := range cases {
-		gotVal, gotErr := FindString(tCase.val, tCase.pointer)
+		gotVal, gotErr := dot.FindString(tCase.val, tCase.pointer)
 		if tCase.expectedErr != nil {
 			assert.Equal(t, tCase.expectedErr, gotErr)
 		} else {
