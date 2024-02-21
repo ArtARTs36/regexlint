@@ -2,15 +2,17 @@ name: Testing
 
 on:
   push:
-    branches:
-      - master
   pull_request:
 
 jobs:
   lint:
     name: lint
-    runs-on: alpine-latest
+    runs-on: ubuntu-latest
     steps:
+      - uses: jirutka/setup-alpine@v1
+        with:
+          branch: v3.15
+
       - name: install deps
         run: apk add gcc libc-dev pcre pcre-dev
 
