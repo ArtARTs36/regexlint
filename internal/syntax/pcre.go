@@ -1,7 +1,7 @@
 package syntax
 
 import (
-	pcre "github.com/GRbit/go-pcre" //nolint:typecheck
+	pcre "github.com/GRbit/go-pcre"
 
 	"github.com/artarts36/regexlint/internal"
 )
