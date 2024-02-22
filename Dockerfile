@@ -13,7 +13,7 @@ RUN go mod download
 COPY . .
 
 RUN apk add --update gcc libc-dev pcre pcre-dev
-RUN GOOS=linux CGO_ENABLED=1 go build -ldflags="-s -w -extldflags=-static" -o /go/bin/regexlint /go/src/github.com/artarts36/regexlint/cmd/main.go
+RUN GOOS=linux CGO_ENABLED=1 go build -ldflags="-s -w -extldflags=-static -X 'main.Version=${APP_VERSION}' -X 'main.Flag=${BUILD_TIME}'" -o /go/bin/regexlint /go/src/github.com/artarts36/regexlint/cmd/main.go
 
 ######################################################
 
