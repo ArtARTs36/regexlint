@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/artarts36/singlecli"
+	"github.com/artarts36/singlecli/color"
 
 	"github.com/artarts36/regexlint/internal/linter"
 	"github.com/artarts36/regexlint/internal/loader"
@@ -72,9 +73,9 @@ func lint(ctx *cli.Context) error {
 
 	for _, regex := range result.Regexes {
 		if regex.Valid() {
-			log.Printf("regex %q is valid", regex.String)
+			log.Println(color.Green("regex %q is valid", regex.String))
 		} else {
-			log.Printf("regex %q is invalid", regex.String)
+			log.Println(color.Red("regex %q is invalid", regex.String))
 		}
 	}
 
