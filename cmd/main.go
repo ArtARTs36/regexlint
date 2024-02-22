@@ -6,10 +6,11 @@ import (
 	"log"
 	"time"
 
+	"github.com/artarts36/singlecli"
+
 	"github.com/artarts36/regexlint/internal/linter"
 	"github.com/artarts36/regexlint/internal/loader"
 	"github.com/artarts36/regexlint/internal/syntax"
-	"github.com/artarts36/singlecli"
 )
 
 var (
