@@ -241,6 +241,8 @@ issues:
   max-same-issues: 50
 
   exclude-rules:
+    - source: "internal/syntax/*.\\go"
+      linters: [ nilerr ]
     - source: "(noinspection|TODO)"
       linters: [ godot ]
     - source: "//noinspection"
