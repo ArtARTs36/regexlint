@@ -8,30 +8,17 @@ import (
 )
 
 type Linter struct {
-	syntax       map[string]Syntax
+	syntax       map[string]syntax.Syntax
 	sourceLoader regexLoader
-}
-
-type Syntax interface {
-	Lint(regex string) (*internal.Regex, error)
 }
 
 type regexLoader interface {
 	Load(source *internal.RegexSource, pointer string) ([]string, error)
 }
 
-func NewLinter(regexLoader regexLoader) *Linter {
-	goSyntax := &syntax.Go{}
-	pcreSyntax := &syntax.PCRE{}
-
+func NewLinter(regexLoader regexLoader, syntax map[string]syntax.Syntax) *Linter {
 	return &Linter{
-		syntax: map[string]Syntax{
-			"go":     goSyntax,
-			"golang": goSyntax,
-			"pcre":   pcreSyntax,
-			"php":    pcreSyntax,
-			"perl":   pcreSyntax,
-		},
+		syntax:       syntax,
 		sourceLoader: regexLoader,
 	}
 }
