@@ -9,19 +9,19 @@ import (
 
 type Linter struct {
 	syntax       map[string]Syntax
-	sourceLoader SourceLoader
+	sourceLoader regexLoader
 }
 
 type Syntax interface {
 	Lint(regex string) (*internal.Regex, error)
 }
 
-type SourceLoader interface {
+type regexLoader interface {
 	Supports(source, pointer string) bool
-	Load(source, pointer string) (string, error)
+	Load(source, pointer string) ([]string, error)
 }
 
-func NewLinter(sourceLoader SourceLoader) *Linter {
+func NewLinter(regexLoader regexLoader) *Linter {
 	goSyntax := &syntax.Go{}
 	pcreSyntax := &syntax.PCRE{}
 
@@ -33,14 +33,14 @@ func NewLinter(sourceLoader SourceLoader) *Linter {
 			"php":    pcreSyntax,
 			"perl":   pcreSyntax,
 		},
-		sourceLoader: sourceLoader,
+		sourceLoader: regexLoader,
 	}
 }
 
-func (l *Linter) Lint(lang, source, sourcePointer string) (*internal.Regex, error) {
-	regex, err := l.sourceLoader.Load(source, sourcePointer)
+func (l *Linter) Lint(lang, source, sourcePointer string) (*LintResult, error) {
+	regexes, err := l.sourceLoader.Load(source, sourcePointer)
 	if err != nil {
-		return nil, fmt.Errorf("unable to load regex: %s", err)
+		return nil, fmt.Errorf("unable to load regexes: %s", err)
 	}
 
 	s, found := l.syntax[lang]
@@ -48,10 +48,22 @@ func (l *Linter) Lint(lang, source, sourcePointer string) (*internal.Regex, erro
 		return nil, fmt.Errorf("syntax %q not found", lang)
 	}
 
-	iRegex, err := s.Lint(regex)
-	if err != nil {
-		return iRegex, fmt.Errorf("source invalid: %s", err.Error())
+	result := &LintResult{
+		Regexes: make([]*internal.Regex, 0, len(regexes)),
 	}
 
-	return iRegex, nil
+	for _, regex := range regexes {
+		iRegex, lintErr := s.Lint(regex)
+		if lintErr != nil {
+			return nil, fmt.Errorf("lint failed: %s", err)
+		}
+
+		if !iRegex.Valid() {
+			result.Fails++
+		}
+
+		result.Regexes = append(result.Regexes, iRegex)
+	}
+
+	return result, nil
 }

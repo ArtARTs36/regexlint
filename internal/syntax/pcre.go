@@ -13,10 +13,11 @@ func (s *PCRE) Lint(regex string) (*internal.Regex, error) {
 	if err != nil {
 		return &internal.Regex{
 			String: regex,
-		}, err
+			Error:  err,
+		}, nil
 	}
 
 	return &internal.Regex{
 		String: regex,
-	}, err
+	}, nil
 }
