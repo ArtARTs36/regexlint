@@ -30,7 +30,7 @@ jobs:
         id: values
         run: |
           echo "version_full=$(echo ${GITHUB_REF##*/} | sed -e 's/^[vV ]*//')" >> $GITHUB_OUTPUT
-          echo "timestamp=$(echo $(date +%FT%T%z))" >> $GITHUB_OUTPUT
+          echo "timestamp=$(echo $(date "+%F %T"))" >> $GITHUB_OUTPUT
 
       - name: Build image
         uses: docker/build-push-action@v4 # Action page: <https://github.com/docker/build-push-action>
