@@ -1,11 +1,10 @@
 name: release
 
 on:
-  push:
-#  release: # Docs: <https://help.github.com/en/articles/events-that-trigger-workflows#release-event-release>
-#    types:
-#      - released
-#      - prereleased
+  release: # Docs: <https://help.github.com/en/articles/events-that-trigger-workflows#release-event-release>
+    types:
+      - released
+      - prereleased
 
 jobs:
   docker:
