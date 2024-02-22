@@ -48,7 +48,6 @@ func (l *Linter) Lint(lang, source, sourcePointer string) (*LintResult, error) {
 		return nil, fmt.Errorf("syntax %q not found", lang)
 	}
 
-	fails := 0
 	result := &LintResult{
 		Regexes: make([]*internal.Regex, 0, len(regexes)),
 	}
@@ -60,7 +59,7 @@ func (l *Linter) Lint(lang, source, sourcePointer string) (*LintResult, error) {
 		}
 
 		if !iRegex.Valid() {
-			fails++
+			result.Fails++
 		}
 
 		result.Regexes = append(result.Regexes, iRegex)
