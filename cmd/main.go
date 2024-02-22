@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"time"
 
 	"github.com/artarts36/singlecli"
 	"github.com/artarts36/singlecli/color"
@@ -16,7 +15,7 @@ import (
 
 var (
 	Version   = "dev"
-	BuildDate = time.Now().Format(time.DateTime)
+	BuildDate = "2024-02-22 22:22:22"
 
 	syntaxMap = syntax.CreateSyntaxMap()
 )
