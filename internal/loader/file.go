@@ -58,5 +58,5 @@ func (f *UnmarshallingFile) supportsExtensions(source string) bool {
 		}
 	}
 
-	return true
+	return false
 }

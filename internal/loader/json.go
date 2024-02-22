@@ -7,5 +7,6 @@ import (
 func NewJSON() *UnmarshallingFile {
 	return &UnmarshallingFile{
 		unmarshaler: json.Unmarshal,
+		extensions:  []string{"json"},
 	}
 }
