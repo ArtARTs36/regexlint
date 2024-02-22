@@ -53,8 +53,20 @@ func main() {
 				Description: "Check golang regex from headers.cors of file.yaml",
 			},
 			{
+				Command:     "regexlint go file.json headers.cors",
+				Description: "Check golang regex from headers.cors of file.json",
+			},
+			{
 				Command:     "regexlint pcre file.txt row-0",
 				Description: "Check PCRE from row 0 of file.txt",
+			},
+			{
+				Command:     "regexlint pcre file.txt row-all",
+				Description: "Check PCRE from each row of file.txt",
+			},
+			{
+				Command:     "regexlint pcre \"php|golang\"",
+				Description: "Check PCRE from command argument",
 			},
 		},
 	}
