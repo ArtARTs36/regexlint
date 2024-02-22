@@ -17,7 +17,7 @@ command
 regexlint pcre "invalid-regex())"
 ```
 
-#### Check regex from yaml file with name `conf.yaml`:
+### Check regex from yaml file with name `conf.yaml`:
 
 _conf.yaml_
 ```yaml
@@ -30,7 +30,7 @@ command
 regexlint go conf.yaml headers.cors
 ```
 
-#### Check regex from json file with name `conf.json`:
+### Check regex from json file with name `conf.json`:
 
 _file.json_
 ```json
@@ -46,7 +46,7 @@ command:
 regexlint pcre conf.json headers.cors
 ```
 
-#### Check regex from .txt file by row number
+### Check regex from .txt file by row number
 
 _file.txt_
 ```text
@@ -59,7 +59,7 @@ command
 regexlint pcre file.txt row-1
 ```
 
-#### Check many regexes from JSON/YAML file
+### Check many regexes from JSON/YAML file
 
 _file.yaml_
 ```yaml
@@ -73,7 +73,7 @@ command
 regexlint go conf.yaml headers.cors1,headers.cors2
 ```
 
-#### Check all rows from .txt file
+### Check all rows from .txt file
 
 _file.txt_
 ```text
