@@ -11,7 +11,7 @@ type TxtAll struct {
 }
 
 func (y *TxtAll) Supports(source, sourcePointer string) bool {
-	return strings.HasSuffix(source, ".txt-all") && sourcePointer == "row-all"
+	return strings.HasSuffix(source, ".txt") && sourcePointer == "row-all"
 }
 
 func (y *TxtAll) Load(source, _ string) ([]string, error) {
