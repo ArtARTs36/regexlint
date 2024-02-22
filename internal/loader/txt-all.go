@@ -11,7 +11,7 @@ type TxtAll struct {
 }
 
 func (y *TxtAll) Supports(source, sourcePointer string) bool {
-	return strings.HasSuffix(source, ".txt") && sourcePointer == "row-all"
+	return strings.HasSuffix(source, ".txt-all") && sourcePointer == "row-all"
 }
 
 func (y *TxtAll) Load(source, _ string) ([]string, error) {
@@ -20,14 +20,18 @@ func (y *TxtAll) Load(source, _ string) ([]string, error) {
 		return []string{}, fmt.Errorf("unable to read file: %s", err)
 	}
 
-	regexes := strings.SplitAfter(string(file), "\n")
-	if len(regexes) == 0 {
-		return []string{}, fmt.Errorf("regexes not found in: %s", file)
+	regexes := strings.Split(string(file), "\n")
+	if len(regexes) == 0 || (len(regexes) == 1 && y.lastRowIsEmpty(regexes)) {
+		return []string{}, fmt.Errorf("regexes not found in: %s", source)
 	}
 
-	if regexes[len(regexes)-1] == "" {
+	if y.lastRowIsEmpty(regexes) {
 		regexes = regexes[:len(regexes)-1]
 	}
 
 	return regexes, nil
+}
+
+func (y *TxtAll) lastRowIsEmpty(regexes []string) bool {
+	return regexes[len(regexes)-1] == ""
 }

@@ -12,7 +12,7 @@ type TxtRow struct {
 }
 
 func (y *TxtRow) Supports(source, sourcePointer string) bool {
-	return strings.HasSuffix(source, ".txt") &&
+	return strings.HasSuffix(source, ".txt-all") &&
 		strings.HasPrefix(sourcePointer, "row-")
 }
 
