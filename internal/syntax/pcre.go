@@ -14,7 +14,7 @@ func (s *PCRE) Lint(regex string) (*internal.Regex, error) {
 		return &internal.Regex{
 			String: regex,
 			Error:  err,
-		}, nil
+		}, nil //nolint:nilerr // it's contract
 	}
 
 	return &internal.Regex{

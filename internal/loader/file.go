@@ -35,9 +35,9 @@ func (f *UnmarshallingFile) Load(source, pointer string) ([]string, error) {
 	pointers := splitPointer(pointer)
 	regexes := make([]string, 0, len(pointers))
 	for _, p := range pointers {
-		s, err := dot.FindString(val, p)
-		if err != nil {
-			return []string{}, err
+		s, dotErr := dot.FindString(val, p)
+		if dotErr != nil {
+			return []string{}, dotErr
 		}
 
 		regexes = append(regexes, s)
