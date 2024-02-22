@@ -87,7 +87,7 @@ func lint(ctx *cli.Context) error {
 
 func syntaxNames() []string {
 	ks := make([]string, 0, len(syntaxMap))
-	for k, _ := range syntaxMap {
+	for k := range syntaxMap {
 		ks = append(ks, k)
 	}
 	return ks
