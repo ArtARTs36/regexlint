@@ -22,7 +22,7 @@ func TestTxtAll_Load(t *testing.T) {
 		{
 			Name:        "fail on empty file",
 			Path:        "./testdata/txt-all/empty.txt",
-			ExpectedErr: errors.New("regexes not found in: ./testdata/txt-all/empty.txt-all"),
+			ExpectedErr: errors.New("regexes not found in: ./testdata/txt-all/empty.txt"),
 		},
 		{
 			Name: "load 2 regex",
