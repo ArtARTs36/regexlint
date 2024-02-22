@@ -15,11 +15,11 @@ type UnmarshallingFile struct {
 
 type fileUnmarshaler func(content []byte, out interface{}) error
 
-func (y *UnmarshallingFile) Supports(source, sourcePointer string) bool {
-	return sourcePointer != "" && y.supportsExtensions(source)
+func (f *UnmarshallingFile) Supports(source, sourcePointer string) bool {
+	return sourcePointer != "" && f.supportsExtensions(source)
 }
 
-func (y *UnmarshallingFile) Load(source, pointer string) ([]string, error) {
+func (f *UnmarshallingFile) Load(source, pointer string) ([]string, error) {
 	file, err := os.ReadFile(source)
 	if err != nil {
 		return []string{}, fmt.Errorf("unable to read file: %s", err)
@@ -27,26 +27,32 @@ func (y *UnmarshallingFile) Load(source, pointer string) ([]string, error) {
 
 	var val map[string]interface{}
 
-	err = y.unmarshaler(file, &val)
+	err = f.unmarshaler(file, &val)
 	if err != nil {
 		return []string{}, fmt.Errorf("unable to unmarshal yaml: %s", err)
 	}
 
-	s, err := dot.FindString(val, pointer)
-	if err != nil {
-		return []string{}, err
+	pointers := splitPointer(pointer)
+	regexes := make([]string, 0, len(pointers))
+	for _, p := range pointers {
+		s, err := dot.FindString(val, p)
+		if err != nil {
+			return []string{}, err
+		}
+
+		regexes = append(regexes, s)
 	}
 
-	return []string{s}, nil
+	return regexes, nil
 }
 
-func (y *UnmarshallingFile) supportsExtensions(source string) bool {
+func (f *UnmarshallingFile) supportsExtensions(source string) bool {
 	ext := filepath.Ext(source)
 	if ext == "" {
 		return false
 	}
 
-	for _, extension := range y.extensions {
+	for _, extension := range f.extensions {
 		if extension == ext {
 			return true
 		}
