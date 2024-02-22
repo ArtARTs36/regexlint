@@ -15,6 +15,9 @@ import (
 )
 
 var (
+	Version   = "dev"
+	BuildDate = time.Now().Format(time.DateTime)
+
 	syntaxMap = syntax.CreateSyntaxMap()
 )
 
@@ -22,8 +25,8 @@ func main() {
 	app := &cli.App{
 		BuildInfo: &cli.BuildInfo{
 			Name:      "regexlint",
-			Version:   "1.0.0",
-			BuildDate: time.Now().Format(time.DateTime),
+			Version:   Version,
+			BuildDate: BuildDate,
 		},
 		Args: []*cli.ArgDefinition{
 			{
