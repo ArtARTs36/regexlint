@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/artarts36/regexlint/internal/syntax"
 	"log"
 	"time"
 
@@ -11,6 +10,7 @@ import (
 
 	"github.com/artarts36/regexlint/internal/linter"
 	"github.com/artarts36/regexlint/internal/loader"
+	"github.com/artarts36/regexlint/internal/syntax"
 )
 
 var (

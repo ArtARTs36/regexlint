@@ -2,9 +2,9 @@ package linter
 
 import (
 	"fmt"
-	"github.com/artarts36/regexlint/internal/syntax"
 
 	"github.com/artarts36/regexlint/internal"
+	"github.com/artarts36/regexlint/internal/syntax"
 )
 
 type Linter struct {
