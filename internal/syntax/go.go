@@ -15,7 +15,7 @@ func (s *Go) Lint(regex string) (*internal.Regex, error) {
 		return &internal.Regex{
 			String: regex,
 			Error:  err,
-		}, nil //nolint:nilerr // it's contract
+		}, nil
 	}
 
 	return &internal.Regex{
