@@ -23,7 +23,7 @@ func (y *TxtAll) Load(source *internal.RegexSource, _ string) ([]string, error) 
 
 	regexes := strings.Split(string(file), "\n")
 	if len(regexes) == 0 || (len(regexes) == 1 && y.lastRowIsEmpty(regexes)) {
-		return []string{}, fmt.Errorf("regexes not found in: %s", source)
+		return []string{}, fmt.Errorf("regexes not found in: %s", source.Source)
 	}
 
 	if y.lastRowIsEmpty(regexes) {
