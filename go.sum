@@ -6,6 +6,8 @@ github.com/artarts36/singlecli v0.0.0-20240222184425-520847011342 h1:nezFCN4E++v
 github.com/artarts36/singlecli v0.0.0-20240222184425-520847011342/go.mod h1:2m+Tn4LFzrg1qbrFaaxjLjJplN3VOKnPHyWRPYUaNqc=
 github.com/artarts36/singlecli v0.0.0-20240222192955-6646816857cd h1:Ri2fWG0dsgNl2fr/sb7qLuluPXahcNVz30uZ+9LbABU=
 github.com/artarts36/singlecli v0.0.0-20240222192955-6646816857cd/go.mod h1:2m+Tn4LFzrg1qbrFaaxjLjJplN3VOKnPHyWRPYUaNqc=
+github.com/artarts36/singlecli v0.0.0-20240222193925-c54f8c570f14 h1:IiocNBLoqsKcRaIRxIqi8a2oBMp2HjIBMOmOuStA57M=
+github.com/artarts36/singlecli v0.0.0-20240222193925-c54f8c570f14/go.mod h1:2m+Tn4LFzrg1qbrFaaxjLjJplN3VOKnPHyWRPYUaNqc=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
