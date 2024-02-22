@@ -3,6 +3,7 @@ package loader
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/artarts36/regexlint/internal"
 	"github.com/artarts36/regexlint/internal/dot"
@@ -32,7 +33,7 @@ func (f *UnmarshallingFile) Load(source *internal.RegexSource, pointer string) (
 		return []string{}, fmt.Errorf("unable to unmarshal yaml: %s", err)
 	}
 
-	pointers := splitPointer(pointer)
+	pointers := f.splitPointer(pointer)
 	regexes := make([]string, 0, len(pointers))
 	for _, p := range pointers {
 		s, dotErr := dot.FindString(val, p)
@@ -54,4 +55,8 @@ func (f *UnmarshallingFile) supportsExtensions(source *internal.RegexSource) boo
 	}
 
 	return false
+}
+
+func (f *UnmarshallingFile) splitPointer(pointer string) []string {
+	return strings.Split(pointer, ",")
 }
