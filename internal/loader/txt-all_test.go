@@ -7,6 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
+	"github.com/artarts36/regexlint/internal"
 	"github.com/artarts36/regexlint/internal/loader"
 )
 
@@ -36,7 +37,7 @@ func TestTxtAll_Load(t *testing.T) {
 
 	for _, tCase := range cases {
 		t.Run(tCase.Name, func(t *testing.T) {
-			regexes, err := l.Load(tCase.Path, "")
+			regexes, err := l.Load(internal.NewRegexSource(tCase.Path), "")
 			if tCase.ExpectedErr != nil {
 				assert.Equal(t, tCase.ExpectedErr, err)
 			} else {

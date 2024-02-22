@@ -3,8 +3,8 @@ package loader
 import (
 	"fmt"
 	"os"
-	"path/filepath"
 
+	"github.com/artarts36/regexlint/internal"
 	"github.com/artarts36/regexlint/internal/dot"
 )
 
@@ -15,12 +15,12 @@ type UnmarshallingFile struct {
 
 type fileUnmarshaler func(content []byte, out interface{}) error
 
-func (f *UnmarshallingFile) Supports(source, sourcePointer string) bool {
+func (f *UnmarshallingFile) Supports(source *internal.RegexSource, sourcePointer string) bool {
 	return sourcePointer != "" && f.supportsExtensions(source)
 }
 
-func (f *UnmarshallingFile) Load(source, pointer string) ([]string, error) {
-	file, err := os.ReadFile(source)
+func (f *UnmarshallingFile) Load(source *internal.RegexSource, pointer string) ([]string, error) {
+	file, err := os.ReadFile(source.Source)
 	if err != nil {
 		return []string{}, fmt.Errorf("unable to read file: %s", err)
 	}
@@ -46,14 +46,9 @@ func (f *UnmarshallingFile) Load(source, pointer string) ([]string, error) {
 	return regexes, nil
 }
 
-func (f *UnmarshallingFile) supportsExtensions(source string) bool {
-	ext := filepath.Ext(source)
-	if ext == "" {
-		return false
-	}
-
+func (f *UnmarshallingFile) supportsExtensions(source *internal.RegexSource) bool {
 	for _, extension := range f.extensions {
-		if extension == ext {
+		if source.HasFileExtension(extension) {
 			return true
 		}
 	}

@@ -6,18 +6,20 @@ import (
 	"os"
 	"strconv"
 	"strings"
+
+	"github.com/artarts36/regexlint/internal"
 )
 
 type TxtRow struct {
 }
 
-func (y *TxtRow) Supports(source, sourcePointer string) bool {
-	return strings.HasSuffix(source, ".txt") &&
+func (y *TxtRow) Supports(source *internal.RegexSource, sourcePointer string) bool {
+	return source.HasFileExtension("txt") &&
 		strings.HasPrefix(sourcePointer, "row-")
 }
 
-func (y *TxtRow) Load(source, pointer string) ([]string, error) {
-	file, err := os.ReadFile(source)
+func (y *TxtRow) Load(source *internal.RegexSource, pointer string) ([]string, error) {
+	file, err := os.ReadFile(source.Source)
 	if err != nil {
 		return []string{}, fmt.Errorf("unable to read file: %s", err)
 	}

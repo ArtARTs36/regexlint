@@ -17,8 +17,7 @@ type Syntax interface {
 }
 
 type regexLoader interface {
-	Supports(source, pointer string) bool
-	Load(source, pointer string) ([]string, error)
+	Load(source *internal.RegexSource, pointer string) ([]string, error)
 }
 
 func NewLinter(regexLoader regexLoader) *Linter {
@@ -38,7 +37,9 @@ func NewLinter(regexLoader regexLoader) *Linter {
 }
 
 func (l *Linter) Lint(lang, source, sourcePointer string) (*LintResult, error) {
-	regexes, err := l.sourceLoader.Load(source, sourcePointer)
+	rSource := internal.NewRegexSource(source)
+
+	regexes, err := l.sourceLoader.Load(rSource, sourcePointer)
 	if err != nil {
 		return nil, fmt.Errorf("unable to load regexes: %s", err)
 	}
