@@ -1,6 +1,6 @@
 # regexlint
 
-regexlint - simple application for regex validation, e.g. in CI pipelines for checking trust domains from configuration files
+regexlint - simple console application for regex validation, e.g. in CI pipelines for checking trust domains from configuration files
 
 **Supported syntax**
 * Go
