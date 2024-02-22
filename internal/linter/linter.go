@@ -54,8 +54,8 @@ func (l *Linter) Lint(lang, source, sourcePointer string) (*LintResult, error) {
 	}
 
 	for _, regex := range regexes {
-		iRegex, err := s.Lint(regex)
-		if err != nil {
+		iRegex, lintErr := s.Lint(regex)
+		if lintErr != nil {
 			return nil, fmt.Errorf("lint failed: %s", err)
 		}
 
