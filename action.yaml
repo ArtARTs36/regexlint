@@ -10,6 +10,9 @@ inputs:
     sourcePointer:
         description: source pointer
         required: false
+branding:
+    icon: check-circle
+    color: green
 runs:
     using: docker
     image: artarts36/regexlint:0.1.0
@@ -17,7 +20,3 @@ runs:
         - ${{ inputs.syntax }}
         - ${{ inputs.source }}
         - ${{ inputs.sourcePointer }}
-
-branding:
-    icon: check-circle
-    color: green
