@@ -9,5 +9,12 @@ docker-run: docker-build
 		--rm artarts36/regexlint:testing \
 		$(ARGS)
 
+docker-gen-ga-config: docker-build
+	docker run \
+		-v "./:/app" \
+		-w /app \
+		--rm artarts36/regexlint:testing \
+		--singlecli-codegen-ga
+
 test:
 	go test ./...

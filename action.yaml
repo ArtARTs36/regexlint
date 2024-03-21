@@ -1,0 +1,19 @@
+name: regexlint
+description: application for regex validation
+inputs:
+    syntax:
+        description: syntax of regex
+        required: true
+    source:
+        description: source of regex (value or path to file)
+        required: true
+    sourcePointer:
+        description: source pointer
+        required: false
+runs:
+    using: docker
+    image: artarts36/regexlint:0.1.0
+    args:
+        - ${{ inputs.syntax }}
+        - ${{ inputs.source }}
+        - ${{ inputs.sourcePointer }}
