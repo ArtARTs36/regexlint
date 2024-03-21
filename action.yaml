@@ -17,3 +17,7 @@ runs:
         - ${{ inputs.syntax }}
         - ${{ inputs.source }}
         - ${{ inputs.sourcePointer }}
+
+branding:
+    icon: check-circle
+    color: green
