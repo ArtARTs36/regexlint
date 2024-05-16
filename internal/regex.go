@@ -1,6 +1,8 @@
 package internal
 
 import (
+	"os"
+
 	"path/filepath"
 )
 
@@ -20,8 +22,12 @@ type RegexSource struct {
 
 func NewRegexSource(source string) *RegexSource {
 	ext := filepath.Ext(source)
-	if ext[0] == '.' {
-		ext = ext[1:]
+	if len(ext) > 0 && ext[0] == '.' {
+		if _, err := os.Stat(source); err == nil {
+			ext = ext[1:]
+		} else {
+			ext = ""
+		}
 	}
 
 	return &RegexSource{
